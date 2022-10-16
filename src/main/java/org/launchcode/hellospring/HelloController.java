@@ -1,3 +1,5 @@
+//Teresa Tull worked on this on 10-9-2022 ch 10 exercises
+
 package org.launchcode.hellospring;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -43,19 +45,20 @@ public class HelloController {
         public String helloForm() {
             return "<html>" +
                     "<body>" +
-                    "<form method = 'post'>" +
+                    "<form action = '/hello' method = 'post'>" +
                     "<input type = 'text' name = 'name' />" +
-                    "</br></br>" +
+//                    "</br></br>" +
                     "<select name = 'language' id='lang'>" +
+                    "<option value = 'English'>English</option>" +
                     "<option value = 'French'>French</option>" +
                     "<option value = 'Spanish'>Spanish</option>" +
                     "<option value = 'German'>German</option>" +
                     "<option value = 'Italian'>Italian</option>" +
                     "<option value = 'Japanese'>Japanese</option>" +
                     "</select>" +
-                    "</br></br>" +
-                    "<form action = '/hello' method = 'post'>" + // submit a request to /hello
-                    "<input type = 'text' name = 'name' >" +
+//                    "</br></br>" +
+//                    "<form action = '/hello' method = 'post'>" + // submit a request to /hello
+//                    "<input type = 'text' name = 'name' >" +
                     "<input type = 'submit' value = 'Greet Me!' >" +
                     "</form>" +
                     "</body>" +
@@ -63,26 +66,33 @@ public class HelloController {
         }
 
         //    Exercises
+
+
         @RequestMapping(method = RequestMethod.POST, value = "hello")
-        public static String createMessage(@RequestParam String name, @RequestParam String language ) {
-            if(name.equals("")){
+        public String helloPost(@RequestParam String name, @RequestParam String language) {
+            if (name == null) {
                 name = "World";
             }
+            return createMessage(name, language);
+        }
+        public static String createMessage(@RequestParam String n, @RequestParam String l) {
             String greeting = "";
 
-            if (language.equals("French")) {
-                greeting =  "Bonjour, ";
-            } else if (language.equals("Spanish")) {
+            if (l.equals("English")) {
+                greeting =  "Hello, ";
+            } else if (l.equals("French")) {
+                    greeting =  "Bonjour, ";
+            } else if (l.equals("Spanish")) {
                 greeting = "Hola, ";
-            } else if (language.equals("German")) {
+            } else if (l.equals("German")) {
                 greeting = "Hallo, ";
-            } else if (language.equals( "Italian")) {
+            } else if (l.equals( "Italian")) {
                 greeting = "Ciao, ";
-            } else if (language.equals("Japanese")) {
+            } else if (l.equals("Japanese")) {
                 greeting = "Kon'nichiwa, ";
             }
 
-            return greeting + name + "!";
+            return greeting + n + "!";
         }
 
     }
