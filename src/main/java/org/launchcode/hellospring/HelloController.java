@@ -45,9 +45,8 @@ public class HelloController {
         public String helloForm() {
             return "<html>" +
                     "<body>" +
-                    "<form action = '/hello' method = 'post'>" +
+                    "<form action = '/hello/hello' method = 'post'>" +
                     "<input type = 'text' name = 'name' />" +
-//                    "</br></br>" +
                     "<select name = 'language' id='lang'>" +
                     "<option value = 'English'>English</option>" +
                     "<option value = 'French'>French</option>" +
@@ -56,9 +55,6 @@ public class HelloController {
                     "<option value = 'Italian'>Italian</option>" +
                     "<option value = 'Japanese'>Japanese</option>" +
                     "</select>" +
-//                    "</br></br>" +
-//                    "<form action = '/hello' method = 'post'>" + // submit a request to /hello
-//                    "<input type = 'text' name = 'name' >" +
                     "<input type = 'submit' value = 'Greet Me!' >" +
                     "</form>" +
                     "</body>" +
@@ -75,7 +71,7 @@ public class HelloController {
             }
             return createMessage(name, language);
         }
-        public static String createMessage(@RequestParam String n, @RequestParam String l) {
+        public static String createMessage(String n, String l) {
             String greeting = "";
 
             if (l.equals("English")) {
