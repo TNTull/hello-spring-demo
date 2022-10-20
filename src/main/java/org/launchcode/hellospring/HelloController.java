@@ -1,4 +1,5 @@
-//Teresa Tull worked on this on 10-9-2022 ch 10 exercises
+//Teresa Tull worked on this on 10-10-2022 ch 10
+//and on 10-19-2022 ch 13
 
 package org.launchcode.hellospring;
 import org.springframework.stereotype.Controller;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
  * Created by Chris Bay
  */
 @Controller
-@ResponseBody
 @RequestMapping("hello")
 public class HelloController {
 
@@ -16,9 +16,9 @@ public class HelloController {
 //        return "Hello, Spring!";
 //    }
 
-
         // lives at /hello/goodbye
         @GetMapping("goodbye")
+        @ResponseBody
         public String goodbye() {
             return "Goodbye, Spring!";
         }
@@ -30,12 +30,14 @@ public class HelloController {
 //    }
         // Handles requests of the form /hello?name=LaunchCode
         @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
+        @ResponseBody
         public String helloWithQueryParam(@RequestParam String name) {
             return "Hello, " + name + "!";
         }
 
         // Handles requests of the form /hello/LaunchCode
         @GetMapping("{name}")
+        @ResponseBody
         public String helloWithPathParam(@PathVariable String name) {
             return "Hello, " + name + "!";
         }
@@ -43,28 +45,14 @@ public class HelloController {
         // /hello/form
         @GetMapping("form")
         public String helloForm() {
-            return "<html>" +
-                    "<body>" +
-                    "<form action = '/hello/hello' method = 'post'>" +
-                    "<input type = 'text' name = 'name' />" +
-                    "<select name = 'language' id='lang'>" +
-                    "<option value = 'English'>English</option>" +
-                    "<option value = 'French'>French</option>" +
-                    "<option value = 'Spanish'>Spanish</option>" +
-                    "<option value = 'German'>German</option>" +
-                    "<option value = 'Italian'>Italian</option>" +
-                    "<option value = 'Japanese'>Japanese</option>" +
-                    "</select>" +
-                    "<input type = 'submit' value = 'Greet Me!' >" +
-                    "</form>" +
-                    "</body>" +
-                    "</html>";
+            return "form";
         }
 
         //    Exercises
 
 
         @RequestMapping(method = RequestMethod.POST, value = "hello")
+        @ResponseBody
         public String helloPost(@RequestParam String name, @RequestParam String language) {
             if (name == null) {
                 name = "World";
